@@ -147,9 +147,9 @@ const Index = () => {
             <div className="flex justify-center">
               <div className="relative w-72 h-72 rounded-full overflow-hidden shadow-2xl border-4 border-white">
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                  src="https://drive.google.com/thumbnail?id=17RI56DVdY9VywpH6xvSwUkcyNiqQVAiq&sz=w400"  
                   alt="Rahul Patil"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover" //https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face
                 />
               </div>
             </div>
