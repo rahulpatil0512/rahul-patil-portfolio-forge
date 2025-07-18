@@ -1,8 +1,14 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Download, Home, Briefcase, User } from 'lucide-react';
+import { Menu, X, Download, Home, Briefcase, User, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,46 +47,46 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
-            Rahul Patil
+            RP
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  location.pathname === item.path
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                }`}
-              >
-                <item.icon className="w-4 h-4" />
-                <span>{item.name}</span>
-              </Link>
-            ))}
+            <Link to="/" className="text-gray-700 hover:text-blue-600 transition-colors">
+              Home
+            </Link>
+            <Link to="/projects" className="text-gray-700 hover:text-blue-600 transition-colors">
+              Projects
+            </Link>
+            <Link to="/current-role" className="text-gray-700 hover:text-blue-600 transition-colors">
+              Current Role
+            </Link>
             
-            {location.pathname === '/' && (
-              <>
-                <button
-                  onClick={() => scrollToSection('about')}
-                  className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  About
-                </button>
-                <button
-                  onClick={() => scrollToSection('connect')}
-                  className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  Connect
-                </button>
-              </>
-            )}
-
-            <Button variant="outline" className="flex items-center space-x-2">
-              <Download className="w-4 h-4" />
-              <span>Resume</span>
+            {/* About Me Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-blue-600 transition-colors">
+                About Me
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem asChild>
+                  <Link to="/background-education">Background & Education</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/interests-hobbies">Interests & Hobbies</Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            <Link to="/connect" className="text-gray-700 hover:text-blue-600 transition-colors">
+              Connect
+            </Link>
+            
+            <Button asChild size="sm">
+              <Link to="/resume">
+                <Download className="w-4 h-4 mr-2" />
+                Resume
+              </Link>
             </Button>
           </div>
 
@@ -99,43 +105,54 @@ const Navigation = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t shadow-lg">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                    location.pathname === item.path
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                  }`}
-                >
-                  <item.icon className="w-5 h-5" />
-                  <span>{item.name}</span>
-                </Link>
-              ))}
-              
-              {location.pathname === '/' && (
-                <>
-                  <button
-                    onClick={() => scrollToSection('about')}
-                    className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
-                  >
-                    About
-                  </button>
-                  <button
-                    onClick={() => scrollToSection('connect')}
-                    className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
-                  >
-                    Connect
-                  </button>
-                </>
-              )}
-
+              <Link 
+                to="/" 
+                className="block text-gray-700 hover:text-blue-600 transition-colors px-3 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link 
+                to="/projects" 
+                className="block text-gray-700 hover:text-blue-600 transition-colors px-3 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Projects
+              </Link>
+              <Link 
+                to="/current-role" 
+                className="block text-gray-700 hover:text-blue-600 transition-colors px-3 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Current Role
+              </Link>
+              <Link 
+                to="/background-education" 
+                className="block text-gray-700 hover:text-blue-600 transition-colors px-3 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Background & Education
+              </Link>
+              <Link 
+                to="/interests-hobbies" 
+                className="block text-gray-700 hover:text-blue-600 transition-colors px-3 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Interests & Hobbies
+              </Link>
+              <Link 
+                to="/connect" 
+                className="block text-gray-700 hover:text-blue-600 transition-colors px-3 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Connect
+              </Link>
               <div className="px-3 py-2">
-                <Button variant="outline" className="w-full flex items-center justify-center space-x-2">
-                  <Download className="w-4 h-4" />
-                  <span>Resume</span>
+                <Button asChild size="sm" className="w-full">
+                  <Link to="/resume">
+                    <Download className="w-4 h-4 mr-2" />
+                    Resume
+                  </Link>
                 </Button>
               </div>
             </div>
